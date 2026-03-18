@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (influenceur(); as influenceurRef) {
+      <div>
+        <h2 data-cy="influenceurDetailsHeading"><span>Influenceur</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ influenceurRef.id }}</span>
+          </dd>
+          <dt><span>Nom</span></dt>
+          <dd>
+            <span>{{ influenceurRef.nom }}</span>
+          </dd>
+          <dt><span>Username</span></dt>
+          <dd>
+            <span>{{ influenceurRef.username }}</span>
+          </dd>
+          <dt><span>Photo Url</span></dt>
+          <dd>
+            <span>{{ influenceurRef.photoUrl }}</span>
+          </dd>
+          <dt><span>Bio</span></dt>
+          <dd>
+            <span>{{ influenceurRef.bio }}</span>
+          </dd>
+          <dt><span>Plateforme</span></dt>
+          <dd>
+            <span>{{
+              { null: '', INSTAGRAM: 'INSTAGRAM', TIKTOK: 'TIKTOK', YOUTUBE: 'YOUTUBE' }[influenceurRef.plateforme ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Categorie</span></dt>
+          <dd>
+            <span>{{
+              {
+                null: '',
+                MODE: 'MODE',
+                LIFESTYLE: 'LIFESTYLE',
+                FOOD: 'FOOD',
+                MUSIQUE: 'MUSIQUE',
+                SPORT: 'SPORT',
+                TECH: 'TECH',
+                VOYAGE: 'VOYAGE',
+                HUMOUR: 'HUMOUR',
+                AUTRE: 'AUTRE',
+              }[influenceurRef.categorie ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span>Score Global</span></dt>
+          <dd>
+            <span>{{ influenceurRef.scoreGlobal }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/influenceur', influenceurRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

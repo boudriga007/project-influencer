@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20260317161147"
+  },
+  "applications": ["*"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "ratioPositif",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "ratioNegatif",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "ratioNeutre",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "scoreSentiment",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "ScoreSentiment",
+  "relationships": [
+    {
+      "otherEntityName": "influenceur",
+      "relationshipName": "influenceur",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

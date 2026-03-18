@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-influenceur-heading" data-cy="InfluenceurCreateUpdateHeading">Create or edit a Influenceur</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let nomRef = editForm.get('nom')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (nomRef.invalid && (nomRef.dirty || nomRef.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let usernameRef = editForm.get('username')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_username">Username</label>
+          <input type="text" class="form-control" name="username" id="field_username" data-cy="username" formControlName="username" />
+          @if (usernameRef.invalid && (usernameRef.dirty || usernameRef.touched)) {
+            <div></div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_photoUrl">Photo Url</label>
+          <input type="text" class="form-control" name="photoUrl" id="field_photoUrl" data-cy="photoUrl" formControlName="photoUrl" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bio">Bio</label>
+          <input type="text" class="form-control" name="bio" id="field_bio" data-cy="bio" formControlName="bio" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_plateforme">Plateforme</label>
+          <select class="form-control" name="plateforme" formControlName="plateforme" id="field_plateforme" data-cy="plateforme">
+            <option [ngValue]="null"></option>
+            @for (plateforme of plateformeValues; track $index) {
+              <option [value]="plateforme">
+                {{ { null: '', INSTAGRAM: 'INSTAGRAM', TIKTOK: 'TIKTOK', YOUTUBE: 'YOUTUBE' }[plateforme] }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_categorie">Categorie</label>
+          <select class="form-control" name="categorie" formControlName="categorie" id="field_categorie" data-cy="categorie">
+            <option [ngValue]="null"></option>
+            @for (categorie of categorieValues; track $index) {
+              <option [value]="categorie">
+                {{
+                  {
+                    null: '',
+                    MODE: 'MODE',
+                    LIFESTYLE: 'LIFESTYLE',
+                    FOOD: 'FOOD',
+                    MUSIQUE: 'MUSIQUE',
+                    SPORT: 'SPORT',
+                    TECH: 'TECH',
+                    VOYAGE: 'VOYAGE',
+                    HUMOUR: 'HUMOUR',
+                    AUTRE: 'AUTRE',
+                  }[categorie]
+                }}
+              </option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_scoreGlobal">Score Global</label>
+          <input
+            type="number"
+            class="form-control"
+            name="scoreGlobal"
+            id="field_scoreGlobal"
+            data-cy="scoreGlobal"
+            formControlName="scoreGlobal"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

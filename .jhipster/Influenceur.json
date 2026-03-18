@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20260317161145"
+  },
+  "applications": ["*"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "photoUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bio",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plateforme",
+      "fieldType": "Plateforme",
+      "fieldValues": "INSTAGRAM,TIKTOK,YOUTUBE"
+    },
+    {
+      "fieldName": "categorie",
+      "fieldType": "Categorie",
+      "fieldValues": "MODE,LIFESTYLE,FOOD,MUSIQUE,SPORT,TECH,VOYAGE,HUMOUR,AUTRE"
+    },
+    {
+      "fieldName": "scoreGlobal",
+      "fieldType": "Double"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Influenceur",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

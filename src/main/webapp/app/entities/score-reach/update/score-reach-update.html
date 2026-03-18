@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-score-reach-heading" data-cy="ScoreReachCreateUpdateHeading">Create or edit a Score Reach</h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nbFollowers">Nb Followers</label>
+          <input
+            type="number"
+            class="form-control"
+            name="nbFollowers"
+            id="field_nbFollowers"
+            data-cy="nbFollowers"
+            formControlName="nbFollowers"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_engagementRate">Engagement Rate</label>
+          <input
+            type="number"
+            class="form-control"
+            name="engagementRate"
+            id="field_engagementRate"
+            data-cy="engagementRate"
+            formControlName="engagementRate"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_reachEstime">Reach Estime</label>
+          <input
+            type="number"
+            class="form-control"
+            name="reachEstime"
+            id="field_reachEstime"
+            data-cy="reachEstime"
+            formControlName="reachEstime"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_scoreReach">Score Reach</label>
+          <input
+            type="number"
+            class="form-control"
+            name="scoreReach"
+            id="field_scoreReach"
+            data-cy="scoreReach"
+            formControlName="scoreReach"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_influenceur">Influenceur</label>
+          <select
+            class="form-control"
+            id="field_influenceur"
+            data-cy="influenceur"
+            name="influenceur"
+            formControlName="influenceur"
+            [compareWith]="compareInfluenceur"
+          >
+            <option [ngValue]="null"></option>
+            @for (influenceurOption of influenceursCollection(); track $index) {
+              <option [ngValue]="influenceurOption">{{ influenceurOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban" />&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving()"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save" />&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

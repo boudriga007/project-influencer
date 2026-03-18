@@ -6,8 +6,43 @@ Main page styles
   display: inline-block;
   width: 347px;
   height: 497px;
-  background: url('../../content/images/jhipster_family_member_2.svg') no-repeat center top;
+  background: url('../../content/images/souha.png') no-repeat center top;
   background-size: contain;
+}
+
+/* Artistic background logo for the home hero */
+.home-hero {
+  position: relative;
+  overflow: hidden;
+}
+.home-hero > * {
+  position: relative; /* ensure content sits above the watermark */
+  z-index: 1;
+}
+.home-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-image: url('../../content/images/logo.png');
+  background-repeat: no-repeat;
+  background-position: center 30%;
+  background-size: 45%;
+  opacity: 0.06;
+  transform: rotate(-12deg) scale(1.2);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
+}
+
+@media (max-width: 768px) {
+  .home-hero::before {
+    background-position: center 20%;
+    background-size: 60%;
+    opacity: 0.045;
+    transform: rotate(-8deg) scale(1.05);
+  }
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
@@ -17,7 +52,7 @@ Main page styles
   only screen and (min-resolution: 192dpi),
   only screen and (min-resolution: 2dppx) {
   .hipster {
-    background: url('../../content/images/jhipster_family_member_2.svg') no-repeat center top;
+    background: url('../../content/images/souha.png') no-repeat center top;
     background-size: contain;
   }
 }

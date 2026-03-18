@@ -7,7 +7,12 @@
         <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
         <span>Refresh list</span>
       </button>
-      <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']" data-cy="entityCreateButton">
+      <button
+        class="btn btn-primary jh-create-entity"
+        [routerLink]="['./new']"
+        data-cy="entityCreateButton"
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+      >
         <fa-icon icon="plus" />
         <span>Create a new user</span>
       </button>
@@ -83,6 +88,7 @@
                     queryParamsHandling="merge"
                     class="btn btn-primary btn-sm"
                     data-cy="entityEditButton"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
                   >
                     <fa-icon icon="pencil-alt" />
                     <span class="d-none d-md-inline">Edit</span>
@@ -94,6 +100,7 @@
                     class="btn btn-danger btn-sm"
                     data-cy="entityDeleteButton"
                     [disabled]="!currentAccount() || currentAccount()?.login === userManagement.login"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
                   >
                     <fa-icon icon="times" />
                     <span class="d-none d-md-inline">Delete</span>

@@ -3,24 +3,24 @@
   "short_name": "TnInfluence",
   "icons": [
     {
-      "src": "./content/images/jhipster_family_member_2_head-192.png",
+      "src": "./content/images/ahmed.jpg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "./content/images/jhipster_family_member_2_head-256.png",
+      "src": "./content/images/souha.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "./content/images/jhipster_family_member_2_head-384.png",
+      "src": "./content/images/arwa.png",
       "sizes": "384x384",
       "type": "image/png"
     },
     {
-      "src": "./content/images/jhipster_family_member_2_head-512.png",
+      "src": "./content/images/ahmed.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpeg"
     }
   ],
   "theme_color": "#000000",

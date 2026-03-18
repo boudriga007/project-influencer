@@ -1,0 +1,137 @@
+<div>
+  <h2 id="page-heading" data-cy="ScoreSentimentHeading">
+    <span>Score Sentiments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-score-sentiment"
+        [routerLink]="['/score-sentiment/new']"
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+      >
+        <fa-icon icon="plus" />
+        <span>Create a new Score Sentiment</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (scoreSentiments().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Score Sentiments found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ratioPositif">
+              <div class="d-flex">
+                <span>Ratio Positif</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ratioNegatif">
+              <div class="d-flex">
+                <span>Ratio Negatif</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ratioNeutre">
+              <div class="d-flex">
+                <span>Ratio Neutre</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="scoreSentiment">
+              <div class="d-flex">
+                <span>Score Sentiment</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="influenceur.id">
+              <div class="d-flex">
+                <span>Influenceur</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (scoreSentiment of scoreSentiments(); track trackId(scoreSentiment)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/score-sentiment', scoreSentiment.id, 'view']">{{ scoreSentiment.id }}</a>
+              </td>
+              <td>{{ scoreSentiment.ratioPositif }}</td>
+              <td>{{ scoreSentiment.ratioNegatif }}</td>
+              <td>{{ scoreSentiment.ratioNeutre }}</td>
+              <td>{{ scoreSentiment.scoreSentiment }}</td>
+              <td>
+                @if (scoreSentiment.influenceur) {
+                  <div>
+                    <a [routerLink]="['/influenceur', scoreSentiment.influenceur.id, 'view']">{{ scoreSentiment.influenceur.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/score-sentiment', scoreSentiment.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/score-sentiment', scoreSentiment.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(scoreSentiment)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                  >
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

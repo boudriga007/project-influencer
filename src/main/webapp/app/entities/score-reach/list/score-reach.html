@@ -1,0 +1,133 @@
+<div>
+  <h2 id="page-heading" data-cy="ScoreReachHeading">
+    <span>Score Reaches</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined" />
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-score-reach"
+        [routerLink]="['/score-reach/new']"
+        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+      >
+        <fa-icon icon="plus" />
+        <span>Create a new Score Reach</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (scoreReaches().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Score Reaches found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nbFollowers">
+              <div class="d-flex">
+                <span>Nb Followers</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="engagementRate">
+              <div class="d-flex">
+                <span>Engagement Rate</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="reachEstime">
+              <div class="d-flex">
+                <span>Reach Estime</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="scoreReach">
+              <div class="d-flex">
+                <span>Score Reach</span>
+
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="influenceur.id">
+              <div class="d-flex">
+                <span>Influenceur</span>
+                <fa-icon class="p-1" icon="sort" />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (scoreReach of scoreReaches(); track trackId(scoreReach)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/score-reach', scoreReach.id, 'view']">{{ scoreReach.id }}</a>
+              </td>
+              <td>{{ scoreReach.nbFollowers }}</td>
+              <td>{{ scoreReach.engagementRate }}</td>
+              <td>{{ scoreReach.reachEstime }}</td>
+              <td>{{ scoreReach.scoreReach }}</td>
+              <td>
+                @if (scoreReach.influenceur) {
+                  <div>
+                    <a [routerLink]="['/influenceur', scoreReach.influenceur.id, 'view']">{{ scoreReach.influenceur.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/score-reach', scoreReach.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye" />
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/score-reach', scoreReach.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                  >
+                    <fa-icon icon="pencil-alt" />
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button
+                    type="submit"
+                    (click)="delete(scoreReach)"
+                    class="btn btn-danger btn-sm"
+                    data-cy="entityDeleteButton"
+                    *jhiHasAnyAuthority="'ROLE_ADMIN'"
+                  >
+                    <fa-icon icon="times" />
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

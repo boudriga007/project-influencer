@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20260317161146"
+  },
+  "applications": ["*"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nbFollowers",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "engagementRate",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "reachEstime",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "scoreReach",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "ScoreReach",
+  "relationships": [
+    {
+      "otherEntityName": "influenceur",
+      "relationshipName": "influenceur",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

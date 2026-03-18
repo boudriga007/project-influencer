@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (scoreReach(); as scoreReachRef) {
+      <div>
+        <h2 data-cy="scoreReachDetailsHeading"><span>Score Reach</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ scoreReachRef.id }}</span>
+          </dd>
+          <dt><span>Nb Followers</span></dt>
+          <dd>
+            <span>{{ scoreReachRef.nbFollowers }}</span>
+          </dd>
+          <dt><span>Engagement Rate</span></dt>
+          <dd>
+            <span>{{ scoreReachRef.engagementRate }}</span>
+          </dd>
+          <dt><span>Reach Estime</span></dt>
+          <dd>
+            <span>{{ scoreReachRef.reachEstime }}</span>
+          </dd>
+          <dt><span>Score Reach</span></dt>
+          <dd>
+            <span>{{ scoreReachRef.scoreReach }}</span>
+          </dd>
+          <dt><span>Influenceur</span></dt>
+          <dd>
+            @if (scoreReach()!.influenceur) {
+              <div>
+                <a [routerLink]="['/influenceur', scoreReach()!.influenceur?.id, 'view']">{{ scoreReachRef.influenceur?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/score-reach', scoreReachRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

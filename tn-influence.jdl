@@ -1,0 +1,41 @@
+enum Plateforme {
+    INSTAGRAM, TIKTOK, YOUTUBE
+}
+
+enum Categorie {
+    MODE, LIFESTYLE, FOOD, MUSIQUE, SPORT, TECH, VOYAGE, HUMOUR, AUTRE
+}
+
+entity Influenceur {
+    nom String required
+    username String unique
+    photoUrl String
+    bio String
+    plateforme Plateforme
+    categorie Categorie
+    scoreGlobal Double
+}
+
+entity ScoreReach {
+    nbFollowers Long
+    engagementRate Double
+    reachEstime Double
+    scoreReach Double
+}
+
+entity ScoreSentiment {
+    ratioPositif Double
+    ratioNegatif Double
+    ratioNeutre Double
+    scoreSentiment Double
+}
+
+relationship OneToOne {
+    ScoreReach{influenceur} to Influenceur
+    ScoreSentiment{influenceur} to Influenceur
+}
+
+paginate Influenceur with pagination
+filter Influenceur
+dto * with mapstruct
+service * with serviceImpl

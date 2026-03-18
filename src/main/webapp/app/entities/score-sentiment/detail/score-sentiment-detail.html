@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (scoreSentiment(); as scoreSentimentRef) {
+      <div>
+        <h2 data-cy="scoreSentimentDetailsHeading"><span>Score Sentiment</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ scoreSentimentRef.id }}</span>
+          </dd>
+          <dt><span>Ratio Positif</span></dt>
+          <dd>
+            <span>{{ scoreSentimentRef.ratioPositif }}</span>
+          </dd>
+          <dt><span>Ratio Negatif</span></dt>
+          <dd>
+            <span>{{ scoreSentimentRef.ratioNegatif }}</span>
+          </dd>
+          <dt><span>Ratio Neutre</span></dt>
+          <dd>
+            <span>{{ scoreSentimentRef.ratioNeutre }}</span>
+          </dd>
+          <dt><span>Score Sentiment</span></dt>
+          <dd>
+            <span>{{ scoreSentimentRef.scoreSentiment }}</span>
+          </dd>
+          <dt><span>Influenceur</span></dt>
+          <dd>
+            @if (scoreSentiment()!.influenceur) {
+              <div>
+                <a [routerLink]="['/influenceur', scoreSentiment()!.influenceur?.id, 'view']">{{ scoreSentimentRef.influenceur?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left" />&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/score-sentiment', scoreSentimentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt" />&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
